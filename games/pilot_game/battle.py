@@ -12,3 +12,4 @@ class Hero:
 
     def load_stats(self, config):
         self.equipments = config["equipment"]
+
