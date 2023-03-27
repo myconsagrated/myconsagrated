@@ -18,17 +18,7 @@ x_coord = 0
 y_coord = SCREEN_HEIGHT - y_size
 
 
-def break_lines(text) -> list:
-    y = 462
-    fontHeight = 30
-    box_surface_bottom = 720 - 30
-    box_surface_width = 1280
-
-    chars_per_line = 0
-    n_lines = 0
-
-
-def test(
+def display_lines_that_fit(
     text, font: Font, box_surface: pygame.surface.Surface, color_text, display_surface
 ):
     y = box_surface.top + 30
@@ -112,10 +102,11 @@ class DialogueBox:
         # self.display_surface.blit(self.text, (x_coord + 35, y_coord + 30))
         # print(self.img_rect)
 
-        self.text_not_printed = test(
+        self.text_not_printed = display_lines_that_fit(
             self.text, self.font, self.img_rect, color_text, self.display_surface
         )
 
+        # draws the "next page/done button"
         pygame.draw.rect(self.display_surface, (75, 150, 150), self.next_close_surf)
 
     def is_clicked(self, m_pos, is_diplayed):
