@@ -48,6 +48,10 @@ class Game:
 
         # self.level = Level()
 
+        # LEVEL
+        self.in_dialogue = False
+        self.dialogBox = DialogueBox(self.font)
+
     def run(self):
         while True:
             bg = pygame.image.load("bg.jpg")
@@ -59,14 +63,16 @@ class Game:
                     pygame.quit()
                     sys.exit()
 
-            # box = DialogueBox("SAMPLE TEXT")
-            text = self.font.render("Hello World!", False, color_text)
-            text_rect = text.get_rect()
-            # rect.size = img.get_size()
-            img = pygame.image.load("assets/Box2.png").convert()
-            img = pygame.transform.scale(img, (x_size, y_size))
-            self.screen.blit(img, (x_coord, y_coord))
-            self.screen.blit(text, (x_coord + 35, y_coord + 30))
+                if event.type == pygame.KEYDOWN:
+                    self.in_dialogue = True
+
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    m_pos = pygame.mouse.get_pos()
+                    if self.dialogBox.is_clicked(m_pos, self.in_dialogue):
+                        self.in_dialogue = False
+
+            if self.in_dialogue:
+                self.dialogBox.display()
 
             # pygame.draw.rect(self.screen, C1, rect)
             # pygame.draw.rect(self.screen, C2, rect2)
